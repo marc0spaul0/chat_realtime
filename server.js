@@ -5,8 +5,9 @@ const {application} = require("express");
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-const port = 3000;
-console.log(`Listening on port ${port}`)
+const port = 5000;
+console.log(`Listening on port ${port}`);
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'public'));
 app.engine('html', require('ejs').renderFile);
@@ -27,4 +28,5 @@ io.on('connection', socket =>{
         socket.broadcast.emit('receivedMessage', data);
     })
 });
+
 server.listen(port);
